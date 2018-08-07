@@ -9,11 +9,10 @@ namespace TasksRepository
     public class Bug: Task
     {
         
-        public Bug(string name, int complexity)
+        public Bug(string name, double timeForFix)
         {
             Name = name;
-            Complexity = complexity;
-            _priority = 1;
+            TimeForFix = timeForFix;
         }
     }
 }

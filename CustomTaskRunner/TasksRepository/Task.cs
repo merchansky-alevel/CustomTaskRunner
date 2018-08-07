@@ -9,8 +9,8 @@ namespace TasksRepository
     public abstract class Task
     {
         private string _name;
-        protected double _priority;
-        private int _complexity;
+        private double _priority;
+        private double _timeForFix;
         public string Name
         {
             get { return _name; }
@@ -27,19 +27,28 @@ namespace TasksRepository
                 }
             }
         }
-        public int Complexity
+        public virtual double Priority
         {
-            get { return _complexity; }
+            get { return _priority=1; }
+        }
+
+        public double TimeForFix
+        {
+            get { return _timeForFix; }
             set
             {
-                if (value<1||value>5)
+                if (value == 1)
                 {
-                    throw new ArgumentException("Unexpected value. Enter only valid complexity value: 1, 2, 3, 4 or 5");
+                    _timeForFix = value;
+                    
+                }
+                if (value == 2 || value == 3 || value == 4 || value == 5)
+                {
+                    _timeForFix = Math.Ceiling(value + ((value * 0.1) * value));
                 }
                 else
                 {
-                    _complexity = value;
-
+                    throw new ArgumentException("Invalid input. Input value: 1, 2, 3, 4 or 5.");
                 }
             }
         }

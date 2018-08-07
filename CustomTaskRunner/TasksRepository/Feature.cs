@@ -8,12 +8,17 @@ namespace TasksRepository
 {
     public class Feature : Task
     {
-        public Feature(string name, int complexity)
+        private double _priority;
+        public Feature(string name, double timeForFix)
         {
             Name = name;
-            Complexity = complexity;
-            _priority = 2;
+            TimeForFix = timeForFix;
         }
+        public override double Priority
+        {
+            get { return _priority = 2; }
+        }
+
 
     }
 }

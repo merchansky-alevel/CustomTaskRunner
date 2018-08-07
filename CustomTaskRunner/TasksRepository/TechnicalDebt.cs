@@ -8,11 +8,19 @@ namespace TasksRepository
 {
     public class TechnicalDebt : Task
     {
-        public TechnicalDebt(string name, int complexity)
+        private double _priority;
+        public override double Priority
+        {
+            get
+            {
+                return _priority = 0.5;
+            }
+        }
+        public TechnicalDebt(string name, double timeForFix)
         {
             Name = name;
-            Complexity = complexity;
-            _priority = 0.5;
+            TimeForFix = timeForFix;
         }
+
     }
 }
