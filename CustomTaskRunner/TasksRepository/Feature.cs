@@ -8,7 +8,6 @@ namespace TasksRepository
 {
     public class Feature : Task
     {
-        private double _priority;
         public Feature(string name, double timeForFix)
         {
             Name = name;
@@ -16,9 +15,7 @@ namespace TasksRepository
         }
         public override double Priority
         {
-            get { return _priority = 2; }
+            get { return priority*2; }
         }
-
-
     }
 }

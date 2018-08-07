@@ -9,7 +9,7 @@ namespace TasksRepository
     public abstract class Task
     {
         private string _name;
-        private double _priority;
+        public const double priority = 1;
         private double _timeForFix;
         public string Name
         {
@@ -23,13 +23,13 @@ namespace TasksRepository
 
                 else
                 {
-                    _name = "Unknown";
+                    throw new ArgumentException("A name cannot be empty. Please input name of a task.");
                 }
             }
         }
         public virtual double Priority
         {
-            get { return _priority=1; }
+            get { return 1; }
         }
 
         public double TimeForFix
@@ -51,6 +51,10 @@ namespace TasksRepository
                     throw new ArgumentException("Invalid input. Input value: 1, 2, 3, 4 or 5.");
                 }
             }
+        }
+        public void FixedOneTask()
+        {
+            double minusTask = TimeForFix - 1;
         }
 
     }

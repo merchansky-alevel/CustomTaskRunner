@@ -8,7 +8,6 @@ namespace TasksRepository
 {
     public class Bug: Task
     {
-        
         public Bug(string name, double timeForFix)
         {
             Name = name;
