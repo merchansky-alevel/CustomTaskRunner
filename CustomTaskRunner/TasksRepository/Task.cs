@@ -8,5 +8,6 @@ namespace TasksRepository
 {
     public class Task
     {
+
     }
 }
