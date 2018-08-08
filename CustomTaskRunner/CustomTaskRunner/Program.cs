@@ -3,7 +3,7 @@ using BoolRandomizer;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using TasksRepository;
 
 namespace CustomTaskRunner
 {
@@ -15,9 +15,9 @@ namespace CustomTaskRunner
 
             string name;
             string type;
-            int complexity; 
+            int complexity;
 
-            Task [] taskArray = new Task[2];
+            SprintTask[] taskArray = new SprintTask[2];
            
             //fill array
             for (int i = 0; i < taskArray.Length; i++)
@@ -35,7 +35,7 @@ namespace CustomTaskRunner
                 Console.WriteLine("Please, select Task complexity from 1 to 5:");
                 complexity = Convert.ToInt32(Console.ReadLine());
                 
-                taskArray[i] = new Task(type, name, complexity);
+                taskArray[i] = new SprintTask(type, name, complexity);
             }
 
             //show array
@@ -58,5 +58,6 @@ namespace CustomTaskRunner
 
                 Console.ReadKey();
         }       
+
     }
 }
