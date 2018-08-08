@@ -7,11 +7,11 @@ namespace BoolRandomizer
     {
         public static bool BoolRandomizerInitial()
         {
-            Thread.Sleep(100);
+            Thread.Sleep(150);
             Random rnd = new Random();
             int i = rnd.Next(0, 100);
 
-            if (i > 35) return false;
+            if (i > 20) return false;
             else return true;
         }
 
@@ -19,7 +19,7 @@ namespace BoolRandomizer
         {
             bool[] array = new bool[1000];
 
-            for (int j=0; j<array.Length - 600; j++)
+            for (int j=0; j<array.Length - 50; j++)
             {
                 array[j] = true;
             }

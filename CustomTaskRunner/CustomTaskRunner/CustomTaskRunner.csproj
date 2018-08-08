@@ -53,6 +53,10 @@
       <Project>{92f3a54a-b59f-4c7a-8fbd-ac960e147604}</Project>
       <Name>BoolRandomizer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Sprint\Sprint.csproj">
+      <Project>{2127BBEE-9FDE-45A7-AAB2-5EB0B8A1CA14}</Project>
+      <Name>Sprint</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TasksRepository\TasksRepository.csproj">
       <Project>{6ee89e31-c73b-4aec-bff7-672597923e50}</Project>
       <Name>TasksRepository</Name>

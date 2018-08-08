@@ -1,10 +1,6 @@
-﻿using System;
-using TasksRepository;
-using BoolRandomizer;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sprint;
+using System;
+
 
 namespace CustomTaskRunner
 {
@@ -12,23 +8,24 @@ namespace CustomTaskRunner
     {
         static void Main(string[] args)
         {
-            SprintTask [] tasks = new SprintTask [5];
-            for (int i=0; i<tasks.Length; i++)
+            int[] complexity = new int[5] { 1, 2, 3, 4, 5 };
+            string[] nameOfTask = new string[5] { "task1", "task2", "task3", "task4", "task5" };
+            TypeOfTasks[] typeOfTasks = { TypeOfTasks.Bug, TypeOfTasks.Feature, TypeOfTasks.TechnicalDept, TypeOfTasks.Bug, TypeOfTasks.Feature };
+
+            SprintWork sprint = new SprintWork(complexity, nameOfTask, typeOfTasks);
+
+            string[] logs;
+
+            sprint.WorkingProcess(out logs);
+
+            for (int i=0; i<logs.Length; i++)
             {
-                tasks[i] = new Bug (i+1, "Lena");
-                // tasks[i].TimeForFix = i + 1;
-                Console.WriteLine(tasks[i].TimeForFix);
-
-                tasks[i].FixIssue();
-                tasks[i].MoveTaskToResolve();
-                tasks[i].FixIssue();
-                tasks[i].MoveTaskToResolve();
-                tasks[i].FixIssue();
-                tasks[i].MoveTaskToResolve();
-
-                Console.WriteLine(tasks[i].TimeForFix);
-                Console.WriteLine("");
+                if (logs[i]!=null)
+                {
+                    Console.WriteLine($"{logs[i]}");
+                }
             }
+
             Console.ReadLine();
 
         }

@@ -20,7 +20,7 @@ namespace TasksRepository
             {
                 if (value == 1) 
                 {
-                    _timeForFix = value;
+                    _timeForFix = Math.Ceiling(value *priority);
                 }
                 else if ((value == 2) || (value == 3) || (value == 4) || (value == 5))
                 {
@@ -49,10 +49,11 @@ namespace TasksRepository
             Name = name;
         }
 
-        public void FixIssue ()
+        public void FixIssue (int velocity=1)
         {
             if (!IsItFixed)
-                _timeForFix--;
+                _timeForFix = _timeForFix - velocity;
+            else throw new InvalidOperationException("The issue is alreade fixed");
         }
 
         public void MoveTaskToResolve ()
