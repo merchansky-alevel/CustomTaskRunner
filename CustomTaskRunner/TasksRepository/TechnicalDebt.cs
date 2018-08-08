@@ -6,19 +6,15 @@ using System.Threading.Tasks;
 
 namespace TasksRepository
 {
-    public class TechnicalDebt : Task
+    public class TechnicalDebt: Task
     {
+        public TechnicalDebt(string name, double timeForFix) : base(name, timeForFix) { }
         public override double Priority
         {
             get
             {
                 return priority * 0.5;
             }
-        }
-        public TechnicalDebt(string name, double timeForFix)
-        {
-            Name = name;
-            TimeForFix = timeForFix;
         }
     }
 }

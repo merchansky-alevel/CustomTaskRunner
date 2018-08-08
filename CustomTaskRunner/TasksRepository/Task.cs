@@ -11,6 +11,7 @@ namespace TasksRepository
         private string _name;
         public const double priority = 1;
         private double _timeForFix;
+
         public string Name
         {
             get { return _name; }
@@ -31,7 +32,6 @@ namespace TasksRepository
         {
             get { return 1; }
         }
-
         public double TimeForFix
         {
             get { return _timeForFix; }
@@ -42,7 +42,7 @@ namespace TasksRepository
                     _timeForFix = value;
                     
                 }
-                if (value == 2 || value == 3 || value == 4 || value == 5)
+                else if (value == 2 || value == 3 || value == 4 || value == 5)
                 {
                     _timeForFix = Math.Ceiling(value + ((value * 0.1) * value));
                 }
@@ -52,10 +52,14 @@ namespace TasksRepository
                 }
             }
         }
+        public  Task(string name, double timeForFix)
+        {
+            Name = name;
+            TimeForFix = timeForFix;
+        }
         public void FixedOneTask()
         {
-            double minusTask = TimeForFix - 1;
+            _timeForFix--;
         }
-
     }
 }

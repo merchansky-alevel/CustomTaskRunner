@@ -8,10 +8,6 @@ namespace TasksRepository
 {
     public class Bug: Task
     {
-        public Bug(string name, double timeForFix)
-        {
-            Name = name;
-            TimeForFix = timeForFix;
-        }
+        public Bug(string name, double timeForFix) : base(name, timeForFix) { }
     }
 }
