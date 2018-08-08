@@ -11,7 +11,7 @@ namespace CustomTaskRunner
     {
         static void Main(string[] args)
         {
-
+            Console.WriteLine("111");
         }
     }
 }
