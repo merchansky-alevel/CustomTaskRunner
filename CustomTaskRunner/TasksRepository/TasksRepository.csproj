@@ -46,5 +46,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TechnicalDebt.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BoolRandomizer\BoolRandomizer.csproj">
+      <Project>{92f3a54a-b59f-4c7a-8fbd-ac960e147604}</Project>
+      <Name>BoolRandomizer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
