@@ -3,8 +3,8 @@ using BoolRandomizer;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TasksRepository;
+
 namespace CustomTaskRunner
 {
     class Program
@@ -15,9 +15,9 @@ namespace CustomTaskRunner
 
             string name;
             string type;
-            int complexity; 
+            int complexity;
 
-            Task [] taskArray = new Task[2];
+            Task[] taskArray = new Task[2];
            
             //fill array
             for (int i = 0; i < taskArray.Length; i++)

@@ -17,14 +17,13 @@ namespace TasksRepository
             get { return _name; }
             set
             {
-                if (value != String.Empty)
+                if (String.IsNullOrEmpty(value))
                 {
-                    _name = value;
+                    throw new ArgumentException("A name cannot be empty or null. Please input name of a task.");
                 }
-
                 else
                 {
-                    throw new ArgumentException("A name cannot be empty. Please input name of a task.");
+                    _name = value;
                 }
             }
         }
