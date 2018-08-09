@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TasksRepository
 {
-	class Sprint
+	public class Sprint
 	{
+		public Sprint()
+		{
+		}
 	}
 }

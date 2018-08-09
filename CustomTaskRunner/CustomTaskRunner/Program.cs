@@ -1,4 +1,5 @@
 ﻿using System;
+using TasksRepository;
 
 namespace CustomTaskRunner
 {
@@ -16,7 +17,12 @@ namespace CustomTaskRunner
 
 			Console.WriteLine("Please, select Task complexity from 1 to 5:");
 			string complexity = Console.ReadLine();
-			Sprint sprint = new Sprint();
+			//Sprint sprint = new Sprint(); //complexity* Priority
+			//Create Sprint massive, пройтись по нему и найти(вернуть) Scope (summ of sprints each task)
+
+
+			if (Scope finished)
+
 			Console.ReadKey();
 		}
 	}
