@@ -4,9 +4,11 @@ namespace CustomTaskRunner
 {
     class TaskType
     {
-        string type;
+        
         public string Type(string typeNumber)
         {
+            string type = string.Empty;
+
             switch (typeNumber)
             {
                 case "1":

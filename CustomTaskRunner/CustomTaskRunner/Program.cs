@@ -1,38 +1,9 @@
 ﻿using System;
-<<<<<<< HEAD
-using TasksRepository;
-
-namespace CustomTaskRunner
-{
-	class Program
-	{
-	static void Main(string[] args)
-		{
-			Console.WriteLine("Welcome to Custom Task Runner!");
-
-			Console.WriteLine("Please, select Task name:");
-			Console.WriteLine("1-Bug");
-			Console.WriteLine("2-Feature");
-			Console.WriteLine("3-Technical Dept");
-			string name = Console.ReadLine();
-
-			Console.WriteLine("Please, select Task complexity from 1 to 5:");
-			string complexity = Console.ReadLine();
-			//Sprint sprint = new Sprint(); //complexity* Priority
-			//Create Sprint massive, пройтись по нему и найти(вернуть) Scope (summ of sprints each task)
-
-
-			if (Scope finished)
-
-			Console.ReadKey();
-		}
-	}
-=======
 using BoolRandomizer;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using TasksRepository;
 
 namespace CustomTaskRunner
 {
@@ -44,49 +15,58 @@ namespace CustomTaskRunner
 
             string name;
             string type;
-            int complexity; 
+            int complexity;
 
-            Task [] taskArray = new Task[2];
+            SprintTask[] taskArray = new SprintTask[2];
            
             //fill array
             for (int i = 0; i < taskArray.Length; i++)
             {
+                Console.WriteLine();
                 Console.WriteLine("Please, select Task type:");
+
+                Console.WriteLine();
                 Console.WriteLine("1-Bug");
                 Console.WriteLine("2-Feature");
                 Console.WriteLine("3-Technical Dept");
 
+                Task generalTask = new Feature("Task", 0);
+                Console.WriteLine();
+
                 type = Console.ReadLine();
 
+                Console.WriteLine();
                 Console.WriteLine("Please, enter Task name:");
                 name = Console.ReadLine();
 
+                Console.WriteLine();
                 Console.WriteLine("Please, select Task complexity from 1 to 5:");
-                complexity = Convert.ToInt32(Console.ReadLine());
                 
-                taskArray[i] = new Task(type, name, complexity);
+                complexity = Convert.ToInt32(Console.ReadLine());
+
+                switch (type)
+                {
+                    case "1":
+                        generalTask = new Bug(name, 0);
+                        break;
+                    case "2":
+                        generalTask = new Feature(name, 0);
+                        break;
+                    case "3":
+                        generalTask = new TechnicalDebt(name, 0);
+                        break;
+                    default:
+                        Console.WriteLine("Sorry, we don't have this task type. Please, check your input");
+                        break;
+                }
+
+                generalTask.TimeForFix = complexity;
+
+                taskArray[i] = new SprintTask(type, name, complexity);
             }
 
-            //show array
-            for (int i = 0; i < taskArray.Length; i++)
-            {
-                Console.WriteLine(taskArray[i]);
-            }
-
-
-
-                //if (validName && valid complexity)
-                //            {
-                //    taskArray[i] = new Task(type, name, complexity);
-                //}
-                //else 
-
-                //{
-                //    restart program
-                //}
-
-                Console.ReadKey();
+            Console.ReadKey();
         }       
+
     }
->>>>>>> 2285f43e1fffcac3a15862d852d2d7cba809e008
 }

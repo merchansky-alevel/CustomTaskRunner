@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomTaskRunner", "CustomTaskRunner\CustomTaskRunner.csproj", "{87E1B3E4-A9B7-4ED0-BD70-171C2E919A04}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6EE89E31-C73B-4AEC-BFF7-672597923E50} = {6EE89E31-C73B-4AEC-BFF7-672597923E50}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasksRepository", "TasksRepository\TasksRepository.csproj", "{6EE89E31-C73B-4AEC-BFF7-672597923E50}"
 	ProjectSection(ProjectDependencies) = postProject
