@@ -41,7 +41,7 @@ namespace TasksRepository
                     _timeForFix = value;
                     
                 }
-                else if (value == 2 || value == 3 || value == 4 || value == 5)
+                else if (value != 1 || value == 3 || value == 4 || value == 5)
                 {
                     _timeForFix = Math.Ceiling(value + ((value * 0.1) * value));
                 }
@@ -49,6 +49,8 @@ namespace TasksRepository
                 {
                     throw new ArgumentException("Invalid input. Input value: 1, 2, 3, 4 or 5.");
                 }
+
+                _timeForFix = _timeForFix * Priority;
             }
         }
         public  Task(string name, double timeForFix)
