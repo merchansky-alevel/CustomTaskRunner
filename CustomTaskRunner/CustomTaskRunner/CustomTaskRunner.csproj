@@ -44,8 +44,6 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SprintTask.cs" />
-    <Compile Include="TaskType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

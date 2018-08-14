@@ -97,30 +97,21 @@ namespace CustomTaskRunner
                     case "1":
                         AggregateAllDataForStartingSprint(TypeOfTasks.Bug, ref complexities, ref typeOfTasks, ref names, ref countOfTasks);
                         $"You have entered {typeOfTasks[countOfTasks - 1]} name: {names[countOfTasks - 1]} complexity {complexities[countOfTasks - 1]}".InfoLog();
+                        exit = IfSprintShouldBeStarted(exit);
                         break;
                     case "2":
                         AggregateAllDataForStartingSprint(TypeOfTasks.Feature, ref complexities, ref typeOfTasks, ref names, ref countOfTasks);
                         $"You have entered {typeOfTasks[countOfTasks - 1]} name: {names[countOfTasks - 1]} complexity {complexities[countOfTasks - 1]}".InfoLog();
+                        exit = IfSprintShouldBeStarted(exit);
                         break;
                     case "3":
                         AggregateAllDataForStartingSprint(TypeOfTasks.TechnicalDept, ref complexities, ref typeOfTasks, ref names, ref countOfTasks);
                         $"You have entered {typeOfTasks[countOfTasks - 1]} name: {names[countOfTasks - 1]} complexity {complexities[countOfTasks - 1]}".InfoLog();
+                        exit = IfSprintShouldBeStarted(exit);
                         break;
                     default:
                         "Invalid. You should enter only [1], [2], [3]. Please press any button to continue.".ErrorLog();
                         Console.ReadLine();
-                        break;
-                }
-
-                "Press any button to add more tasks or \"space\" to start team work".UsualLog();
-                ConsoleKeyInfo key = Console.ReadKey();
-
-                switch (key.Key)
-                {
-                    case ConsoleKey.Spacebar:
-                        exit = false;
-                        break;
-                    default:
                         break;
                 }
             }
@@ -130,6 +121,25 @@ namespace CustomTaskRunner
 
             return sprint;
         }
+
+
+        public static bool IfSprintShouldBeStarted (bool exit)
+        {
+            "Press any button to add more tasks or \"space\" to start team work".UsualLog();
+            ConsoleKeyInfo key = Console.ReadKey();
+
+            switch (key.Key)
+            {
+                case ConsoleKey.Spacebar:
+                    exit = false;
+                    break;
+                default:
+                    break;
+            }
+
+            return exit;
+        }
+
 
         private static void AggregateAllDataForStartingSprint(TypeOfTasks typeOfTask, ref int[] complexities, ref TypeOfTasks[] typeOfTasks, ref string[] names, ref int countOfTasks)
         {
@@ -202,7 +212,6 @@ namespace CustomTaskRunner
             Console.WriteLine("Enter [1] to add Bud (priority = 2)");
             Console.WriteLine("Enter [2] to add Feature (priority = 1)");
             Console.WriteLine("Enter [3] to add Technical Debt (priority = 0.5)");
-            Console.WriteLine("Enter [4] to return to previous menu");
             Console.Write("Please make your choise: ");
         }
 
