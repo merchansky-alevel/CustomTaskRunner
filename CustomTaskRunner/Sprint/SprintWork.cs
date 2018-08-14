@@ -24,7 +24,7 @@ namespace Sprint
 
         public SprintWork(int[] complexity, string[] nameOfTask, TypeOfTasks[] typeOfTasks)
         {
-            Logs = new LogsHelper[50];
+            Logs = new LogsHelper[100];
             ScopeOfSprints = new SprintTask[typeOfTasks.Length];
 
             for (int i = 0; i < ScopeOfSprints.Length; i++)
