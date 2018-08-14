@@ -1,17 +1,20 @@
 ﻿using System;
+using Helpers;
 
 
 namespace TasksRepository
 {
     public abstract class SprintTask
     {
-        public const int priority = 1;
+        public const int priority=1;
         private double _timeForFix;
-        
         public string _name;
-        public bool IsItFixed { get; set; }
 
-        public virtual double Priority { get { return priority; }}
+        public bool IsItFixed { get; set; }
+        public virtual double Priority { get; } = priority;
+
+        public abstract TypeOfTasks TypeOfTasks { get; }
+
 
         public double TimeForFix
         {
@@ -20,11 +23,11 @@ namespace TasksRepository
             {
                 if (value == 1) 
                 {
-                    _timeForFix = Math.Ceiling(value *priority);
+                    _timeForFix = Math.Ceiling(value * Priority);
                 }
                 else if ((value == 2) || (value == 3) || (value == 4) || (value == 5))
                 {
-                    _timeForFix = Math.Ceiling(value + ((value*0.1)*value))*priority;
+                    _timeForFix = Math.Ceiling(Math.Ceiling(value + ((value*0.1)*value))* Priority);
                 }
                 else
                     throw new ArgumentException("Parameter can have only value: 1, 2, 3, 4, 5");
@@ -45,7 +48,7 @@ namespace TasksRepository
 
         public SprintTask(int complexity, string name = "BlaBlaBla")
         {
-            TimeForFix=complexity ;
+            TimeForFix =complexity ;
             Name = name;
         }
 
@@ -58,9 +61,7 @@ namespace TasksRepository
 
         public void MoveTaskToResolve ()
         {
-            if (_timeForFix == 0)
                 IsItFixed = true;
-
         }
 
     }

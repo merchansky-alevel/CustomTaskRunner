@@ -1,29 +1,33 @@
-﻿using System;
-using TasksRepository;
-using BoolRandomizer;
+﻿using TasksRepository;
+using Helpers;
 
 
 namespace Sprint
 {
     public class SprintWork
     {
-        public const int NumberOfDevelopers = 1;
-        public const int DeveloperVelocity = 1;
-        public const int TeamVelosity = NumberOfDevelopers*DeveloperVelocity;
         public const int NumberOfSprints = 30;
+        public const int TeamVelosity = 1;
 
-        SprintTask [] ScopeOfSprints { get; set; }
-        public double ScopeOfStoryPoints { get;}
-        private int _sprintsBeforeRelease;
+        public LogsHelper[] Logs { get; set; }
+        public int LogCounter { get; set; }
 
-        public int SprintsBeforeRelease { get; set; }
+        static int NumberOfCurrentSprint { get; set; }
+        SprintTask[] ScopeOfSprints { get; set; }
+        public double ScopeOfStoryPoints { get; }
 
-        public SprintWork (int [] complexity,  string [] nameOfTask, TypeOfTasks [] typeOfTasks)
+
+        static SprintWork()
         {
+            NumberOfCurrentSprint = 1;
+        }
 
+        public SprintWork(int[] complexity, string[] nameOfTask, TypeOfTasks[] typeOfTasks)
+        {
+            Logs = new LogsHelper[50];
             ScopeOfSprints = new SprintTask[typeOfTasks.Length];
 
-            for (int i=0; i< ScopeOfSprints.Length; i++)
+            for (int i = 0; i < ScopeOfSprints.Length; i++)
             {
                 switch (typeOfTasks[i])
                 {
@@ -31,57 +35,109 @@ namespace Sprint
                         ScopeOfSprints[i] = new Bug(complexity[i], nameOfTask[i]);
                         break;
                     case TypeOfTasks.Feature:
-                        ScopeOfSprints[i] = new Feature (complexity[i], nameOfTask[i]);
+                        ScopeOfSprints[i] = new Feature(complexity[i], nameOfTask[i]);
                         break;
                     case TypeOfTasks.TechnicalDept:
-                        ScopeOfSprints[i] = new TechnicalDebt (complexity[i], nameOfTask[i]);
+                        ScopeOfSprints[i] = new TechnicalDebt(complexity[i], nameOfTask[i]);
                         break;
                 }
                 ScopeOfStoryPoints += ScopeOfSprints[i].TimeForFix;
             }
-            SprintsBeforeRelease = NumberOfSprints;
         }
 
-        public bool IfGoalsAreReacheble ()
+        public bool IfGoalsAreReachable()
         {
             if (ScopeOfStoryPoints <= NumberOfSprints)
+            {
+                AddNewEntryToLog($"Release goals are reachable. We should implement {ScopeOfStoryPoints} story points. Let's try to do all our best!", LogTypes.Info);
                 return true;
-            else return false;
+            }
+            else
+            {
+                AddNewEntryToLog($"Release goals are not reachable. You will no be able to finish all your {ScopeOfStoryPoints} points within {NumberOfSprints}", LogTypes.Error);
+                return false;
+            }
         }
 
-        public void WorkingProcess (out string [] logs)
+        public void WorkingProcess()
         {
-            logs = new string[1000];
-            int logsCounter = 0;
-
-                for (int i = 0; i < ScopeOfSprints.Length; i++)
+            for (int i = 0; i < ScopeOfSprints.Length; i++)
+            {
+                if (NumberOfCurrentSprint <= NumberOfSprints)
                 {
-                    if (ScopeOfSprints[i].TimeForFix>0)
-                    {
-                        for (int j = 0; j < ScopeOfSprints[i].TimeForFix; j++)
-                       {
-                        if (SprintsBeforeRelease != 0)
-                        {
-                            if (!Randomizer.BoolRandomizerInitial())
-                            {
-                                ScopeOfSprints[i].FixIssue();
-                                logs[logsCounter] = $"Developer was working with issue {ScopeOfSprints[i].Name}. The part of the issue was fixed successfully";
-                                logsCounter++;
-                                SprintsBeforeRelease--;
-                            }
-                            else
-                            {
-                                logs[logsCounter] = $"Developer was working with issue {ScopeOfSprints[i].Name}. The part of the issue was returned by QA";
-                                logsCounter++;
-                                SprintsBeforeRelease--;
-                            }
-                        }
-                        else
-                            break;
-                        }
-                     }
-                 }
+                    AddNewEntryToLog($"We are starting to resolve {ScopeOfSprints[i].TypeOfTasks} {ScopeOfSprints[i].Name}. In best case we will need {ScopeOfSprints[i].TimeForFix} sprint(s) to resolve this issue.", LogTypes.Info);
+                    FixingOneIssue(ScopeOfSprints[i]);
+                }
+            }
+            if (NumberOfCurrentSprint <= NumberOfSprints)
+            {
+                DisplayingSuccessResults();
+            }
+            else
+            {
+                DisplayingBadResults();
+            }
         }
 
+        private void FixingOneIssue(SprintTask sprintTask)
+        {
+            int realCountOfSprintForResolving = 0;
+
+            while ((sprintTask.TimeForFix > 0) && (NumberOfCurrentSprint <= NumberOfSprints))
+                {
+                    if (!Randomizer.BoolRandomizerInitial())
+                    {
+                        sprintTask.FixIssue(TeamVelosity);
+                        AddNewEntryToLog ($"The sprint {NumberOfCurrentSprint}. {sprintTask.TypeOfTasks} {sprintTask.Name}  is in progress. The part of the issue is implemented successfully. We need {sprintTask.TimeForFix} sprint(s) to finish this issue.");
+                   }
+                    else
+                    {
+                        AddNewEntryToLog($"The sprint {NumberOfCurrentSprint}. {sprintTask.TypeOfTasks} {sprintTask.Name} is in progress. The part of the issue is returned by QA. We need {sprintTask.TimeForFix} sprint(s) to finish this issue.", LogTypes.Error);
+                    }
+                NumberOfCurrentSprint++;
+                realCountOfSprintForResolving++;
+            }
+            if (sprintTask.TimeForFix <= 0)
+            {
+                sprintTask.MoveTaskToResolve();
+                AddNewEntryToLog($"The issue {sprintTask.Name} is resolved. We spent {realCountOfSprintForResolving} sptrint(s) on implementation", LogTypes.Info);
+            }
+        }
+
+        private void AddNewEntryToLog (string str, LogTypes logTypes = LogTypes.Usual)
+        {
+            Logs[LogCounter] = new LogsHelper();
+            Logs[LogCounter].AddNewLogEntry(str, logTypes);
+            LogCounter++;
+        }
+
+
+        private void DisplayingSuccessResults ()
+        {
+            AddNewEntryToLog($"Congratulations! We managed to finish all scope before release", LogTypes.Success);
+            AddNewEntryToLog($"Next issues are fixed:", LogTypes.Info);
+            for (int i = 0; i < ScopeOfSprints.Length; i++)
+            {
+                AddNewEntryToLog($"{i+1}. {ScopeOfSprints[i].TypeOfTasks} with name {ScopeOfSprints[i].Name}");
+            }
+        }
+
+        private void DisplayingBadResults()
+        {
+            AddNewEntryToLog($"Release deadline has come. Bad work. We are not be able to resolve all issues", LogTypes.Error);
+            AddNewEntryToLog($"Next issues are resolved:", LogTypes.Info);
+            for (int i = 0; i < ScopeOfSprints.Length; i++)
+            {
+                if (ScopeOfSprints[i].IsItFixed)
+                AddNewEntryToLog($"{i + 1}. {ScopeOfSprints[i].TypeOfTasks} with name {ScopeOfSprints[i].Name}");
+            }
+            AddNewEntryToLog($"We have failed to resolve:", LogTypes.Info);
+            for (int i = 0; i < ScopeOfSprints.Length; i++)
+            {
+                if (!ScopeOfSprints[i].IsItFixed)
+                    AddNewEntryToLog($"{i + 1}. {ScopeOfSprints[i].TypeOfTasks} with name {ScopeOfSprints[i].Name}");
+            }
+        }
     }
 }
+

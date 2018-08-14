@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace BoolRandomizer
+namespace Helpers
 {
     public static class Randomizer
     {
@@ -36,4 +36,5 @@ namespace BoolRandomizer
             return array [z];
         }
     }
+
 }

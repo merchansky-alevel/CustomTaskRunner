@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sprint
+namespace Helpers
 {
-   public  enum TypeOfTasks
+    public enum LogTypes
     {
-        Bug,
-        Feature,
-        TechnicalDept
+        Info,
+        Success,
+        Usual,
+        Error
     }
 }
