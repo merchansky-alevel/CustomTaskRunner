@@ -9,6 +9,7 @@ namespace CustomTaskRunner
     class Program
     {
         static void Main(string[] args)
+
         {
             Console.SetWindowSize(150, Console.WindowHeight);
             SprintWork sprint;
@@ -20,8 +21,14 @@ namespace CustomTaskRunner
                 {
                     case "1":
                         sprint = AddNewTasksMenu();
-                        if (!sprint.IfGoalsAreReachable())
-                            "Let's try anyway!".InfoLog();
+                        if (sprint.IfGoalsAreReachable())
+                        {
+                            $"Release goals are reachable. We should implement {sprint.ScopeOfStoryPoints} story points. Let's try to do all our best!".InfoLog();
+                        }
+                        else
+                        {
+                            $"Release goals are not reachable. You will not be able to finish all your {sprint.ScopeOfStoryPoints} points within {SprintWork.NumberOfSprints} sprint(s). But let's try anyway!".InfoLog();
+                        }
                         sprint.WorkingProcess();
                         "Please press any button to see results!".InfoLog();
                         Console.ReadLine();
@@ -43,7 +50,7 @@ namespace CustomTaskRunner
             while (exit);
         }
 
-        private static void DisplayResults (LogsHelper[] logs)
+        private static void DisplayResults(LogsHelper[] logs)
         {
             int i = 0;
             do
@@ -69,7 +76,7 @@ namespace CustomTaskRunner
             while (logs[i] != null);
         }
 
-        private static SprintWork AddNewTasksMenu ()
+        private static SprintWork AddNewTasksMenu()
         {
             bool exit = true;
             int[] complexities;
@@ -89,7 +96,7 @@ namespace CustomTaskRunner
                 {
                     case "1":
                         AggregateAllDataForStartingSprint(TypeOfTasks.Bug, ref complexities, ref typeOfTasks, ref names, ref countOfTasks);
-                        $"You have entered {typeOfTasks[countOfTasks-1]} name: {names[countOfTasks-1]} complexity {complexities[countOfTasks-1]}".InfoLog();
+                        $"You have entered {typeOfTasks[countOfTasks - 1]} name: {names[countOfTasks - 1]} complexity {complexities[countOfTasks - 1]}".InfoLog();
                         break;
                     case "2":
                         AggregateAllDataForStartingSprint(TypeOfTasks.Feature, ref complexities, ref typeOfTasks, ref names, ref countOfTasks);
@@ -124,7 +131,7 @@ namespace CustomTaskRunner
             return sprint;
         }
 
-        private static void AggregateAllDataForStartingSprint (TypeOfTasks typeOfTask, ref int[] complexities, ref TypeOfTasks[] typeOfTasks, ref string[] names, ref int countOfTasks)
+        private static void AggregateAllDataForStartingSprint(TypeOfTasks typeOfTask, ref int[] complexities, ref TypeOfTasks[] typeOfTasks, ref string[] names, ref int countOfTasks)
         {
 
             int complexity;
@@ -141,11 +148,11 @@ namespace CustomTaskRunner
         private static string EnterName()
         {
             bool exit = true;
-            string desciption=null;
+            string desciption = null;
             do
             {
                 Console.Write("Enter short desciption of issue: ");
-                desciption =Console.ReadLine();
+                desciption = Console.ReadLine();
                 if (!string.IsNullOrEmpty(desciption))
                 {
                     exit = false;
@@ -155,7 +162,7 @@ namespace CustomTaskRunner
             }
             while (exit);
 
-           return desciption;
+            return desciption;
         }
 
         private static int EnterComplexity()
@@ -166,7 +173,7 @@ namespace CustomTaskRunner
             {
                 Console.Write("Enter complexity of issue (Possible values are: 1, 2, 3, 4, 5): ");
                 var result = Int32.TryParse(Console.ReadLine(), out complexity);
-                if (((complexity == 1)||(complexity == 2) || (complexity == 3) || (complexity == 4) || (complexity == 5)) && (result == true))
+                if (((complexity == 1) || (complexity == 2) || (complexity == 3) || (complexity == 4) || (complexity == 5)) && (result == true))
                 {
                     exit = false;
                 }
@@ -199,7 +206,7 @@ namespace CustomTaskRunner
             Console.Write("Please make your choise: ");
         }
 
-        private static TypeOfTasks[] ExpandTasksArray (TypeOfTasks[] typeOfTasks, TypeOfTasks typeOfTask)
+        private static TypeOfTasks[] ExpandTasksArray(TypeOfTasks[] typeOfTasks, TypeOfTasks typeOfTask)
         {
             TypeOfTasks[] tempTypeOfTasks = new TypeOfTasks[typeOfTasks.Length + 1];
             Array.Copy(typeOfTasks, tempTypeOfTasks, typeOfTasks.Length);
@@ -208,18 +215,18 @@ namespace CustomTaskRunner
             return tempTypeOfTasks;
         }
 
-        private static int [] ExpandComplexityArray(int [] complexities, int complexity)
+        private static int[] ExpandComplexityArray(int[] complexities, int complexity)
         {
-            int[] tempArray = new int [complexities.Length + 1];
+            int[] tempArray = new int[complexities.Length + 1];
             Array.Copy(complexities, tempArray, complexities.Length);
             tempArray[tempArray.Length - 1] = complexity;
 
             return tempArray;
         }
 
-        private static string [] ExpandNameArray(string[] names, string name)
+        private static string[] ExpandNameArray(string[] names, string name)
         {
-            string[] tempArray = new string [names.Length + 1];
+            string[] tempArray = new string[names.Length + 1];
             Array.Copy(names, tempArray, names.Length);
             tempArray[tempArray.Length - 1] = name;
             return tempArray;

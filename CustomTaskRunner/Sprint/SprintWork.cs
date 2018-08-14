@@ -49,12 +49,10 @@ namespace Sprint
         {
             if (ScopeOfStoryPoints <= NumberOfSprints)
             {
-                AddNewEntryToLog($"Release goals are reachable. We should implement {ScopeOfStoryPoints} story points. Let's try to do all our best!", LogTypes.Info);
                 return true;
             }
             else
             {
-                AddNewEntryToLog($"Release goals are not reachable. You will no be able to finish all your {ScopeOfStoryPoints} points within {NumberOfSprints}", LogTypes.Error);
                 return false;
             }
         }
