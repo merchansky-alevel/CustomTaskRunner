@@ -116,12 +116,10 @@ namespace CustomTaskRunner
                 }
             }
             while (exit);
-
             SprintWork sprint = new SprintWork(complexities, names, typeOfTasks);
 
             return sprint;
         }
-
 
         public static bool IfSprintShouldBeStarted (bool exit)
         {
@@ -140,10 +138,8 @@ namespace CustomTaskRunner
             return exit;
         }
 
-
         private static void AggregateAllDataForStartingSprint(TypeOfTasks typeOfTask, ref int[] complexities, ref TypeOfTasks[] typeOfTasks, ref string[] names, ref int countOfTasks)
         {
-
             int complexity;
             string name;
 

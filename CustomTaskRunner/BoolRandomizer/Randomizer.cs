@@ -29,12 +29,9 @@ namespace Helpers
                 int x = rnd1.Next(0, array.Length-1);
                 array[j] = array[x];
             }
-
             Random rnd2 = new Random();
             int z = rnd2.Next(0, array.Length - 1);
-
             return array [z];
         }
     }
-
 }

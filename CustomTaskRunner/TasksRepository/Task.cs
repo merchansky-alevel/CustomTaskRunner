@@ -63,6 +63,5 @@ namespace TasksRepository
         {
                 IsItFixed = true;
         }
-
     }
 }
