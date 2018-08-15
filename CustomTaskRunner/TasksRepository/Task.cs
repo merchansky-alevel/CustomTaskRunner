@@ -1,64 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Helpers;
+
 
 namespace TasksRepository
 {
-    public abstract class Task
+    public abstract class SprintTask
     {
-        private string _name;
-        public const double priority = 1;
+        public const int priority=1;
         private double _timeForFix;
+        public string _name;
+
+        public bool IsItFixed { get; set; }
+        public virtual double Priority { get; } = priority;
+
+        public abstract TypeOfTasks TypeOfTasks { get; }
+
+
+        public double TimeForFix
+        {
+            get { return _timeForFix; }
+            set
+            {
+                if (value == 1) 
+                {
+                    _timeForFix = Math.Ceiling(value * Priority);
+                }
+                else if ((value == 2) || (value == 3) || (value == 4) || (value == 5))
+                {
+                    _timeForFix = Math.Ceiling(Math.Ceiling(value + ((value*0.1)*value))* Priority);
+                }
+                else
+                    throw new ArgumentException("Parameter can have only value: 1, 2, 3, 4, 5");
+            }
+        }
 
         public string Name
         {
             get { return _name; }
             set
             {
-                if (String.IsNullOrEmpty(value))
-                {
-                    throw new ArgumentException("A name cannot be empty or null. Please input name of a task.");
-                }
-                else
-                {
+                if (!string.IsNullOrEmpty(value))
                     _name = value;
-                }
-            }
-        }
-        public virtual double Priority
-        {
-            get { return 1; }
-        }
-        public double TimeForFix
-        {
-            get { return _timeForFix; }
-            set
-            {
-                if (value == 1)
-                {
-                    _timeForFix = value;
-                    
-                }
-                else if (value == 2 || value == 3 || value == 4 || value == 5)
-                {
-                    _timeForFix = Math.Ceiling(value + ((value * 0.1) * value));
-                }
                 else
-                {
-                    throw new ArgumentException("Invalid input. Input value: 1, 2, 3, 4 or 5.");
-                }
+                    throw new ArgumentNullException("Value can not be null");
             }
         }
-        public  Task(string name, double timeForFix)
+
+        public SprintTask(int complexity, string name = "BlaBlaBla")
         {
+            TimeForFix =complexity ;
             Name = name;
-            TimeForFix = timeForFix;
         }
-        public void FixedOneTask()
+
+        public void FixIssue (int velocity=1)
         {
-            _timeForFix--;
+            if (!IsItFixed)
+                _timeForFix = _timeForFix - velocity;
+            else throw new InvalidOperationException("The issue is alreade fixed");
         }
+
+        public void MoveTaskToResolve ()
+        {
+                IsItFixed = true;
+        }
+
     }
 }

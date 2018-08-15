@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Helpers;
 
 namespace TasksRepository
 {
-    public class Bug: Task
+    public class Bug : SprintTask
     {
-        public Bug(string name, double timeForFix) : base(name, timeForFix) { }
-        public override double Priority
+        public override double Priority { get; } = priority*2;
+        public override TypeOfTasks TypeOfTasks { get; } = TypeOfTasks.Bug;
+
+        public Bug(int complexity, string name) : base(complexity, name)
         {
-            get { return priority * 2; }
+            Priority = base.Priority * 2;
         }
 
     }
