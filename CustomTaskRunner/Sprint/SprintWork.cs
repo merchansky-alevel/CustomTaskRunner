@@ -59,7 +59,7 @@ namespace Sprint
 
         public void WorkingProcess()
         {
-            bool ifNonFixedIssuesExists=false;
+            bool ifNonFixedIssuesExist=false;
             for (int i = 0; i < ScopeOfSprints.Length; i++)
             {
                 if (NumberOfCurrentSprint < NumberOfSprints)
@@ -70,9 +70,9 @@ namespace Sprint
             }
 
             for (int i = 0; i < ScopeOfSprints.Length; i++)
-               if (ScopeOfSprints[i].IsItFixed == false) ifNonFixedIssuesExists = true;
+               if (ScopeOfSprints[i].IsItFixed == false) ifNonFixedIssuesExist = true;
             
-            if (!ifNonFixedIssuesExists) DisplayingSuccessResults();
+            if (!ifNonFixedIssuesExist) DisplayingSuccessResults();
             else DisplayingBadResults();
         }
 
