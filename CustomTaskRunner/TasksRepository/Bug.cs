@@ -9,7 +9,6 @@ namespace TasksRepository
 
         public Bug(int complexity, string name) : base(complexity, name)
         {
-            Priority = base.Priority * 2;
         }
 
     }
