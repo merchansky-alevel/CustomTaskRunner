@@ -30,10 +30,10 @@ namespace CustomTaskRunner
                             $"Release goals are not reachable. You will not be able to finish all your {sprint.ScopeOfStoryPoints} points within {SprintWork.NumberOfSprints} sprint(s). But let's try anyway!".InfoLog();
                         }
                         sprint.WorkingProcess();
-                        "Please press any button to see results!".InfoLog();
+                        "Please press [Enter] button to see results!".InfoLog();
                         Console.ReadLine();
                         DisplayResults(sprint.Logs);
-                        "Press any button to exit".InfoLog();
+                        "Press [Enter] button to exit".InfoLog();
                         Console.ReadLine();
                         exit = false;
                         break;
