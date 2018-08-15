@@ -125,7 +125,7 @@ namespace CustomTaskRunner
 
         public static bool IfSprintShouldBeStarted (bool exit)
         {
-            "Press any button to add more tasks or \"space\" to start team work".UsualLog();
+            "Press any button to add more tasks or [SPACE] to start team work".UsualLog();
             ConsoleKeyInfo key = Console.ReadKey();
 
             switch (key.Key)
