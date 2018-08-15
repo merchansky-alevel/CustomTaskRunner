@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomTaskRunner", "CustomT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasksRepository", "TasksRepository\TasksRepository.csproj", "{6EE89E31-C73B-4AEC-BFF7-672597923E50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoolRandomizer", "BoolRandomizer\BoolRandomizer.csproj", "{92F3A54A-B59F-4C7A-8FBD-AC960E147604}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "BoolRandomizer\Helpers.csproj", "{92F3A54A-B59F-4C7A-8FBD-AC960E147604}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sprint", "Sprint\Sprint.csproj", "{2127BBEE-9FDE-45A7-AAB2-5EB0B8A1CA14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{92F3A54A-B59F-4C7A-8FBD-AC960E147604}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92F3A54A-B59F-4C7A-8FBD-AC960E147604}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92F3A54A-B59F-4C7A-8FBD-AC960E147604}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2127BBEE-9FDE-45A7-AAB2-5EB0B8A1CA14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2127BBEE-9FDE-45A7-AAB2-5EB0B8A1CA14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2127BBEE-9FDE-45A7-AAB2-5EB0B8A1CA14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2127BBEE-9FDE-45A7-AAB2-5EB0B8A1CA14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

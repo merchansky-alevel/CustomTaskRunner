@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Helpers;
+
 
 namespace TasksRepository
 {
-    public class Feature : Task
-    {
-        public Feature(string name, double timeForFix) : base(name, timeForFix) { }
+    public class Feature : SprintTask
+     {
+        public override TypeOfTasks TypeOfTasks { get; } = TypeOfTasks.Feature;
+
+        public Feature (int complexity, string name) : base(complexity, name)
+        {
+        }
     }
 }

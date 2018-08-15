@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Helpers;
 
 namespace TasksRepository
 {
-    public class TechnicalDebt: Task
+    public class TechnicalDebt : SprintTask
     {
-        public TechnicalDebt(string name, double timeForFix) : base(name, timeForFix) { }
-        public override double Priority
+        public override TypeOfTasks TypeOfTasks { get; } = TypeOfTasks.TechnicalDept;
+        public override double Priority { get; } = priority*0.5;
+
+
+        public TechnicalDebt(int complexity, string name) : base(complexity, name)
         {
-            get
-            {
-                return priority * 0.5;
-            }
+
         }
     }
 }

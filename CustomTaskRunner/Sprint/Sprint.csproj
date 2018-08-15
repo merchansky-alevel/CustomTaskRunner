@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{87E1B3E4-A9B7-4ED0-BD70-171C2E919A04}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>CustomTaskRunner</RootNamespace>
-    <AssemblyName>CustomTaskRunner</AssemblyName>
+    <ProjectGuid>{2127BBEE-9FDE-45A7-AAB2-5EB0B8A1CA14}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sprint</RootNamespace>
+    <AssemblyName>Sprint</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,20 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="SprintWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BoolRandomizer\Helpers.csproj">
       <Project>{92f3a54a-b59f-4c7a-8fbd-ac960e147604}</Project>
       <Name>Helpers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Sprint\Sprint.csproj">
-      <Project>{2127BBEE-9FDE-45A7-AAB2-5EB0B8A1CA14}</Project>
-      <Name>Sprint</Name>
     </ProjectReference>
     <ProjectReference Include="..\TasksRepository\TasksRepository.csproj">
       <Project>{6ee89e31-c73b-4aec-bff7-672597923e50}</Project>
