@@ -19,7 +19,7 @@ namespace Sprint
 
         static SprintWork()
         {
-            NumberOfCurrentSprint = 1;
+            NumberOfCurrentSprint = 0;
         }
 
         public SprintWork(int[] complexity, string[] nameOfTask, TypeOfTasks[] typeOfTasks)
@@ -59,40 +59,40 @@ namespace Sprint
 
         public void WorkingProcess()
         {
+            bool ifNonFixedIssuesExists=false;
             for (int i = 0; i < ScopeOfSprints.Length; i++)
             {
-                if (NumberOfCurrentSprint <= NumberOfSprints)
+                if (NumberOfCurrentSprint < NumberOfSprints)
                 {
                     AddNewEntryToLog($"We are starting to resolve {ScopeOfSprints[i].TypeOfTasks} {ScopeOfSprints[i].Name}. In best case we will need {ScopeOfSprints[i].TimeForFix} sprint(s) to resolve this issue.", LogTypes.Info);
                     FixingOneIssue(ScopeOfSprints[i]);
                 }
             }
-            if (NumberOfCurrentSprint <= NumberOfSprints)
-            {
-                DisplayingSuccessResults();
-            }
-            else
-            {
-                DisplayingBadResults();
-            }
+
+            for (int i = 0; i < ScopeOfSprints.Length; i++)
+               if (ScopeOfSprints[i].IsItFixed == false) ifNonFixedIssuesExists = true;
+            
+            if (!ifNonFixedIssuesExists) DisplayingSuccessResults();
+            else DisplayingBadResults();
         }
 
         private void FixingOneIssue(SprintTask sprintTask)
         {
             int realCountOfSprintForResolving = 0;
 
-            while ((sprintTask.TimeForFix > 0) && (NumberOfCurrentSprint <= NumberOfSprints))
+            while ((sprintTask.TimeForFix > 0) && (NumberOfCurrentSprint < NumberOfSprints))
                 {
-                    if (!Randomizer.BoolRandomizerInitial())
-                    {
-                        sprintTask.FixIssue(TeamVelosity);
-                        AddNewEntryToLog ($"The sprint {NumberOfCurrentSprint}. {sprintTask.TypeOfTasks} {sprintTask.Name}  is in progress. The part of the issue is implemented successfully. We need {sprintTask.TimeForFix} sprint(s) to finish this issue.");
-                   }
-                    else
-                    {
-                        AddNewEntryToLog($"The sprint {NumberOfCurrentSprint}. {sprintTask.TypeOfTasks} {sprintTask.Name} is in progress. The part of the issue is returned by QA. We need {sprintTask.TimeForFix} sprint(s) to finish this issue.", LogTypes.Error);
-                    }
                 NumberOfCurrentSprint++;
+                if (!Randomizer.BoolRandomizerInitial())
+                {
+                    sprintTask.FixIssue(TeamVelosity);
+                        AddNewEntryToLog ($"The sprint {NumberOfCurrentSprint}. {sprintTask.TypeOfTasks} {sprintTask.Name}  is in progress. The part of the issue is implemented successfully. We need {sprintTask.TimeForFix} sprint(s) to finish this issue.");
+                }
+                else
+                {
+                    AddNewEntryToLog($"The sprint {NumberOfCurrentSprint}. {sprintTask.TypeOfTasks} {sprintTask.Name} is in progress. The part of the issue is returned by QA. We need {sprintTask.TimeForFix} sprint(s) to finish this issue.", LogTypes.Error);
+                }
+
                 realCountOfSprintForResolving++;
             }
             if (sprintTask.TimeForFix <= 0)
